@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="system" method="upgrade">
+	<name>plg_system_bvinfo</name>
+	<author>Yair Lahav</author>
+	<creationDate>July 2015</creationDate>
+	<copyright>Copyright (C) 2015 Yair Lahav. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>yair@bonimba.co.il</authorEmail>
+	<authorUrl>www.bonimba.co.il</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_BVINFO_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="BVinfo">bvinfo.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_system_bvinfo.ini</language>
+		<language tag="en-GB">en-GB.plg_system_bvinfo.sys.ini</language>
+	</languages>
+	<config>
+	</config>
+</extension>
