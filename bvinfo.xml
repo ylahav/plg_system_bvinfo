@@ -10,7 +10,8 @@
 	<version>1.0.0</version>
 	<description>PLG_BVINFO_XML_DESCRIPTION</description>
 	<files>
-		<filename plugin="BVinfo">bvinfo.php</filename>
+		<filename plugin="bvinfo">bvinfo.php</filename>
+        <filename plugin="bvinfo">geoplugin.php</filename>
 	</files>
 	<languages>
 		<language tag="en-GB">en-GB.plg_system_bvinfo.ini</language>
