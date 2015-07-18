@@ -1,0 +1,14 @@
+
+.bvinfo-container {
+    width: auto;
+}
+
+.bvinfo-item {
+    width: 100%;
+}
+
+.bvinfo-label,
+.bvinfo-value {
+	float: left;
+    width: 50%;
+}
