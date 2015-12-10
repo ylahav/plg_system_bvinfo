@@ -19,20 +19,20 @@ require_once('geoplugin.php');
 class PlgSystemBvinfo extends JPlugin {
 
 	var $debug = false;
-	var $geoInplugin;
+	var $geoplugin;
 
     public function PlgSystemBvinfo(&$subject, $config) {
         if ($this->debug) {
             echo "<br>     PlgSystemBvinfo -  PlgSystemBvinfo<br>";
         }
         $this->geoplugin = new geoPlugin();
-			$this->geoplugin->locate();
-        	if ($this->debug) {
+        $this->geoplugin->locate();
+        if ($this->debug) {
 			echo "<br>		--- geoplugin --------------------------<br>";
 			print_r($this->geoplugin);
 		}
 
-	parent::__construct($subject, $config);
+	   parent::__construct($subject, $config);
     }
 
 	/**
