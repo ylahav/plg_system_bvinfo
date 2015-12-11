@@ -20,13 +20,14 @@ class PlgSystemBvinfo extends JPlugin {
 
 	var $debug = false;
 	var $geoplugin;
+    var $visitorInfo;
 
     public function PlgSystemBvinfo(&$subject, $config) {
         if ($this->debug) {
             echo "<br>     PlgSystemBvinfo -  PlgSystemBvinfo<br>";
         }
         $this->geoplugin = new geoPlugin();
-        $this->geoplugin->locate();
+        $this->visitorInfo = $this->geoplugin->locate();
         if ($this->debug) {
 			echo "<br>		--- geoplugin --------------------------<br>";
 			print_r($this->geoplugin);
@@ -52,7 +53,6 @@ class PlgSystemBvinfo extends JPlugin {
                     print_r($this->geoplugin);
                 }
             }
-
-		return $this->geoplugin;
+        return $this->visitorInfo;
 	}
 }

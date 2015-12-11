@@ -35,20 +35,8 @@ class geoPlugin {
 	var $currency = 'USD';
 
 	//initiate the geoPlugin vars
-	var $ip = null;
-	var $city = null;
-	var $region = null;
-	var $areaCode = null;
-	var $dmaCode = null;
-	var $countryCode = null;
-	var $countryName = null;
-	var $continentCode = null;
-	var $latitude = null;
-	var $longitude = null;
-	var $currencyCode = null;
-	var $currencySymbol = null;
-	var $currencyConverter = null;
-
+    var $visitorInfo;
+	
 	function geoPlugin() {
 
 	}
@@ -85,19 +73,20 @@ class geoPlugin {
 		$data = unserialize($response);
 
 		//set the geoPlugin vars
-		$this->ip = $ip;
-		$this->city = $data['geoplugin_city'];
-		$this->region = $data['geoplugin_region'];
-		$this->areaCode = $data['geoplugin_areaCode'];
-		$this->dmaCode = $data['geoplugin_dmaCode'];
-		$this->countryCode = $data['geoplugin_countryCode'];
-		$this->countryName = $data['geoplugin_countryName'];
-		$this->continentCode = $data['geoplugin_continentCode'];
-		$this->latitude = $data['geoplugin_latitude'];
-		$this->longitude = $data['geoplugin_longitude'];
-		$this->currencyCode = $data['geoplugin_currencyCode'];
-		$this->currencySymbol = $data['geoplugin_currencySymbol'];
-		$this->currencyConverter = $data['geoplugin_currencyConverter'];
+		$this->visitorInfo['ip'] = $ip;
+		$this->visitorInfo['city'] = $data['geoplugin_city'];
+		$this->visitorInfo['region'] = $data['geoplugin_region'];
+		$this->visitorInfo['areaCode'] = $data['geoplugin_areaCode'];
+		$this->visitorInfo['dmaCode'] = $data['geoplugin_dmaCode'];
+		$this->visitorInfo['countryCode'] = $data['geoplugin_countryCode'];
+		$this->visitorInfo['countryName'] = $data['geoplugin_countryName'];
+		$this->visitorInfo['continentCode'] = $data['geoplugin_continentCode'];
+		$this->visitorInfo['latitude'] = $data['geoplugin_latitude'];
+		$this->visitorInfo['longitude'] = $data['geoplugin_longitude'];
+		$this->visitorInfo['currencyCode'] = $data['geoplugin_currencyCode'];
+		$this->visitorInfo['currencySymbol'] = $data['geoplugin_currencySymbol'];
+		$this->visitorInfo['currencyConverter'] = $data['geoplugin_currencyConverter'];
+        return $this->visitorInfo;
 
 	}
 
@@ -131,7 +120,7 @@ class geoPlugin {
 	function convert($amount, $float=2, $symbol=true) {
 
 		//easily convert amounts to geolocated currency.
-		if ( !is_numeric($this->currencyConverter) || $this->currencyConverter == 0 ) {
+		if ( !is_numeric($this->visitorInfo['currencyConverter']) || $this->visitorInfo['currencyConverter'] == 0 ) {
 			trigger_error('geoPlugin class Notice: currencyConverter has no value.', E_USER_NOTICE);
 			return $amount;
 		}
@@ -140,20 +129,20 @@ class geoPlugin {
 			return $amount;
 		}
 		if ( $symbol === true ) {
-			return $this->currencySymbol . round( ($amount * $this->currencyConverter), $float );
+			return $this->visitorInfo['currencySymbol'] . round( ($amount * $this->visitorInfo['currencyConverter']), $float );
 		} else {
-			return round( ($amount * $this->currencyConverter), $float );
+			return round( ($amount * $this->visitorInfo['currencyConverter']), $float );
 		}
 	}
 
 	function nearby($radius=10, $limit=null) {
 
-		if ( !is_numeric($this->latitude) || !is_numeric($this->longitude) ) {
+		if ( !is_numeric($this->visitorInfo['latitude']) || !is_numeric($this->visitorInfo['longitude']) ) {
 			trigger_error ('geoPlugin class Warning: Incorrect latitude or longitude values.', E_USER_NOTICE);
 			return array( array() );
 		}
 
-		$host = "http://www.geoplugin.net/extras/nearby.gp?lat=" . $this->latitude . "&long=" . $this->longitude . "&radius={$radius}";
+		$host = "http://www.geoplugin.net/extras/nearby.gp?lat=" . $this->visitorInfo['latitude'] . "&long=" . $this->visitorInfo['longitude'] . "&radius={$radius}";
 
 		if ( is_numeric($limit) )
 			$host .= "&limit={$limit}";
@@ -161,8 +150,10 @@ class geoPlugin {
 		return unserialize( $this->fetch($host) );
 
 	}
-
-
+    
+    public function getVisitorInfo() {
+        return $this->visitorInfo;
+    }
 }
 
 ?>
