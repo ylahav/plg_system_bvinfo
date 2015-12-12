@@ -24,7 +24,11 @@ Geographical location of the IP address (visitor) and locate currency (symbol, c
 
 See http://www.geoplugin.com/webservices/php for more specific details of this free service
 
+This file has some minor changes to apply Joomla rules.
+
 */
+
+defined("_JEXEC") or die("Restricted access");
 
 class geoPlugin {
 
